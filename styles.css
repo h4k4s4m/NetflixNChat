@@ -1,0 +1,35 @@
+.main-butt{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 50px;
+    width: 50px;
+    background-color: aquamarine;
+    color: black;
+    font-family: fantasy;
+    font-size: 20px;
+    z-index: 3;
+    opacity: 0.4;
+    transition: opacity, .5s;
+}
+.main-butt:hover{
+    opacity: 1;
+}
+
+.main-window{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 300px;
+    background-color: blueviolet;
+    color: black;
+    font-family: fantasy;
+    font-size: 1.2rem;
+    z-index: 2;
+    opacity: 0.4;
+    transition: opacity, .5s;
+}
+.main-window:hover{
+    opacity: 1;
+}
