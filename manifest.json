@@ -7,7 +7,7 @@
  
   "content_scripts": [{
     "css": ["styles.css"],
-    "js": ["content.js"],
+    "js": ["jquery.js", "content.js"],
     "matches": ["www.netflix.com/*"]
   }]
  
