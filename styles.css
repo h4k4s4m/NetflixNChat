@@ -1,13 +1,13 @@
 .main-butt{
     position: absolute;
-    top: 0;
+    top: 10px;
     right: 0;
     height: 50px;
     width: 50px;
     background-color: aquamarine;
     color: black;
     font-family: fantasy;
-    font-size: 20px;
+    font-size: 16px;
     z-index: 3;
     opacity: 0.4;
     transition: opacity, .5s;
@@ -32,4 +32,62 @@
 }
 .main-window:hover{
     opacity: 1;
+}
+
+.main-window:hover{
+    opacity: 1;
+}
+
+.text-window{
+    position: relative;
+    top: 75px;
+    margin: auto;
+    height: 80%;
+    width: 270px;
+    background-color: white;
+    color: black;
+    font-family: fantasy;
+    font-size: 1.2rem;
+    z-index: 2;
+    transition: opacity, .5s;
+    overflow-y: auto;
+}
+.text-window:hover{
+    opacity: 1;
+}
+
+.chat-input{
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    margin: auto;
+    height: 44px;
+    width: 200px;
+    background-color: white;
+    color: black;
+    font-family: fantasy;
+    font-size: 1.2rem;
+    z-index: 2;
+    transition: opacity, .5s;
+}
+
+.chat-butt{
+    text-align: center;
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    margin: auto;
+    height: 50px;
+    width: 50px;
+    background-color: white;
+    color: black;
+    font-family: fantasy;
+    font-size: 16px;
+    z-index: 2;
+    transition: opacity, .5s;
+}
+
+.message{
+    margin-top: 0px;
+    margin-bottom: 15px;
 }
