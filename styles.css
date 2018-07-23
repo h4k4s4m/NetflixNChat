@@ -90,6 +90,8 @@
 .message{
     margin-top: 0px;
     margin-bottom: 15px;
+    word-break: break-word;
+    user-select: text;
 }
 
 .name-input{
