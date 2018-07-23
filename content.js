@@ -17,11 +17,16 @@ $(document.body).append(chat_main);
 var chat_text = $('<div class="text-window"> <div/>');
 $(".main-window").append(chat_text);
 
+//Socket IO bit
+var socket = io("https://netflixnchat.herokuapp.com/");
+
 //Create and adds the input field and submit button
 var input = $('<input class="chat-input" type="text">');
 input.keypress((e) => {
     if (e.key == "Enter") {
         if ($(".chat-input").val().length > 0) {
+            socket.emit("chat message", "Test");
+            
             $(".text-window").append("<p class='message' >Sahm: " + $(".chat-input").val() + "</p>");
             $(".chat-input").val("");
         }
@@ -43,3 +48,6 @@ var butt2 = $('<button/>',
     });
 butt2.addClass("chat-butt");
 $(".main-window").append(butt2);
+
+//socket io
+
