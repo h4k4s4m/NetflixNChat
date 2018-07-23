@@ -1,3 +1,5 @@
+var user="default"
+
 // Creates and adds button to document body
 var Butt = $('<button/>',
     {
@@ -22,7 +24,7 @@ var socket = io("https://netflixnchat.herokuapp.com/");
 socket.on('chat message', function (msg) {
     console.log(msg);
     if(msg){
-    $(".text-window").append("<p class='message' >Sahm: " + msg + "</p>");
+    $(".text-window").append("<p class='message' >" + msg + "</p>");
     }
 });
 
@@ -32,7 +34,7 @@ var input = $('<input class="chat-input" type="text">');
 input.keypress((e) => {
     if (e.key == "Enter") {
         if ($(".chat-input").val().length > 0) {
-            socket.emit("chat message", $(".chat-input").val());
+            socket.emit("chat message", (user + ": " + $(".chat-input").val()));
             $(".chat-input").val("");
         }
     }
@@ -45,7 +47,7 @@ var butt2 = $('<button/>',
         text: 'Send',
         click: function () {
             if ($(".chat-input").val().length > 0) {
-                socket.emit("chat message", $(".chat-input").val());
+                socket.emit("chat message", (user + ": " + $(".chat-input").val()));
                 $(".chat-input").val("");
             }
         }
@@ -54,5 +56,15 @@ var butt2 = $('<button/>',
 butt2.addClass("chat-butt");
 $(".main-window").append(butt2);
 
-//socket io
-
+//Create and adds the input field and submit button
+var name_field = $('<input class="name-input" placeholder="Type a nickname here" type="text">');
+name_field.keypress((e) => {
+    if (e.key == "Enter") {
+        if ($(".name-input").val().length > 0) {
+            user = $(".name-input").val();
+            alert("Name changed to " + $(".name-input").val());
+            $(".name-input").val("");
+        }
+    }
+})
+$(".main-window").append(name_field);

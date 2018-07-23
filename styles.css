@@ -91,3 +91,18 @@
     margin-top: 0px;
     margin-bottom: 15px;
 }
+
+.name-input{
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    margin: auto;
+    height: 44px;
+    width: 200px;
+    background-color: white;
+    color: black;
+    font-family: fantasy;
+    font-size: 1.2rem;
+    z-index: 2;
+    transition: opacity, .5s;
+}
