@@ -19,15 +19,20 @@ $(".main-window").append(chat_text);
 
 //Socket IO bit
 var socket = io("https://netflixnchat.herokuapp.com/");
+socket.on('chat message', function (msg) {
+    console.log(msg);
+    if(msg){
+    $(".text-window").append("<p class='message' >Sahm: " + msg + "</p>");
+    }
+});
+
 
 //Create and adds the input field and submit button
 var input = $('<input class="chat-input" type="text">');
 input.keypress((e) => {
     if (e.key == "Enter") {
         if ($(".chat-input").val().length > 0) {
-            socket.emit("chat message", "Test");
-            
-            $(".text-window").append("<p class='message' >Sahm: " + $(".chat-input").val() + "</p>");
+            socket.emit("chat message", $(".chat-input").val());
             $(".chat-input").val("");
         }
     }
@@ -40,7 +45,7 @@ var butt2 = $('<button/>',
         text: 'Send',
         click: function () {
             if ($(".chat-input").val().length > 0) {
-                $(".text-window").append("<p class='message' >Sahm: " + $(".chat-input").val() + "</p>");
+                socket.emit("chat message", $(".chat-input").val());
                 $(".chat-input").val("");
             }
         }
