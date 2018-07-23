@@ -35,7 +35,7 @@ var input = $('<input class="chat-input" type="text">');
 input.keypress((e) => {
     if (e.key == "Enter") {
         if ($(".chat-input").val().length > 0) {
-            socket.emit("chat message", (user + ": " + $(".chat-input").val()));
+            socket.emit("chat message", (user + ": " +"<span class=\"msg-text\">" + $(".chat-input").val() + "</span>"));
             $(".chat-input").val("");
         }
     }

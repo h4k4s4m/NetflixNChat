@@ -1,12 +1,12 @@
 .main-butt{
     position: absolute;
     top: 10px;
-    right: 0;
+    right: 15px;
     height: 50px;
     width: 50px;
     background-color: aquamarine;
     color: black;
-    font-family: fantasy;
+    font-family: cursive;
     font-size: 16px;
     z-index: 3;
     opacity: 0.4;
@@ -24,8 +24,8 @@
     width: 300px;
     background-color: blueviolet;
     color: black;
-    font-family: fantasy;
-    font-size: 1.2rem;
+    font-family: cursive;
+    font-size: 16px;
     z-index: 2;
     opacity: 0.4;
     transition: opacity, .5s;
@@ -46,8 +46,8 @@
     width: 270px;
     background-color: white;
     color: black;
-    font-family: fantasy;
-    font-size: 1.2rem;
+    font-family: cursive;
+    font-size: 16px;
     z-index: 2;
     transition: opacity, .5s;
     overflow-y: auto;
@@ -65,14 +65,15 @@
     width: 200px;
     background-color: white;
     color: black;
-    font-family: fantasy;
-    font-size: 1.2rem;
+    font-family: cursive;
+    font-size: 16px;
     z-index: 2;
     transition: opacity, .5s;
 }
 
 .chat-butt{
     text-align: center;
+    padding: 0;
     position: absolute;
     bottom: 10px;
     right: 15px;
@@ -81,7 +82,7 @@
     width: 50px;
     background-color: white;
     color: black;
-    font-family: fantasy;
+    font-family: cursive;
     font-size: 16px;
     z-index: 2;
     transition: opacity, .5s;
@@ -89,9 +90,16 @@
 
 .message{
     margin-top: 0px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    margin-left: 5px;
     word-break: break-word;
     user-select: text;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+}
+.msg-text{
+    font-weight: normal;
 }
 
 .name-input{
@@ -103,8 +111,8 @@
     width: 200px;
     background-color: white;
     color: black;
-    font-family: fantasy;
-    font-size: 1.2rem;
+    font-family: cursive;
+    font-size: 16px;
     z-index: 2;
     transition: opacity, .5s;
 }
