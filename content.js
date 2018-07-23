@@ -1,3 +1,4 @@
+//User variable that can be changed client-side
 var user="default"
 
 // Creates and adds button to document body
@@ -22,9 +23,9 @@ $(".main-window").append(chat_text);
 //Socket IO bit
 var socket = io("https://netflixnchat.herokuapp.com/");
 socket.on('chat message', function (msg) {
-    console.log(msg);
     if(msg){
     $(".text-window").append("<p class='message' >" + msg + "</p>");
+    $(".text-window")[0].scrollTop = $(".text-window")[0].scrollHeight;
     }
 });
 
