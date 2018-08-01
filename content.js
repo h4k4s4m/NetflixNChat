@@ -1,5 +1,5 @@
 //User variable that can be changed client-side
-var user="default"
+var user = "default"
 
 // Creates and adds button to document body
 var Butt = $('<button/>',
@@ -23,9 +23,9 @@ $(".main-window").append(chat_text);
 //Socket IO bit
 var socket = io("https://netflixnchat.herokuapp.com/");
 socket.on('chat message', function (msg) {
-    if(msg){
-    $(".text-window").append("<p class='message' >" + msg + "</p>");
-    $(".text-window")[0].scrollTop = $(".text-window")[0].scrollHeight;
+    if (msg) {
+        $(".text-window").append("<p class='message' >" + msg + "</p>");
+        $(".text-window")[0].scrollTop = $(".text-window")[0].scrollHeight;
     }
 });
 
@@ -35,8 +35,18 @@ var input = $('<input class="chat-input" type="text">');
 input.keypress((e) => {
     if (e.key == "Enter") {
         if ($(".chat-input").val().length > 0) {
-            socket.emit("chat message", (user + ": " +"<span class=\"msg-text\">" + $(".chat-input").val() + "</span>"));
-            $(".chat-input").val("");
+            if ($(".chat-input").val() == "Play") {
+                socket.emit("group control", "Play")
+                console.log("Group Play Evoked")
+            }
+            else if ($(".chat-input").val() == "Pause") {
+                socket.emit("group control", "Pause")
+                console.log("Group Pause Evoked")
+            }
+            else {
+                socket.emit("chat message", (user + ": " + "<span class=\"msg-text\">" + $(".chat-input").val() + "</span>"));
+                $(".chat-input").val("");
+            }
         }
     }
 })
@@ -69,3 +79,19 @@ name_field.keypress((e) => {
     }
 })
 $(".main-window").append(name_field);
+
+
+
+
+//clicks the pause button
+socket.on('group control', function (e) {
+    console.log("socket caught")
+    if (e == "Pause") {
+        $(".button-nfplayerPause").click()
+        console.log("pause triggered")
+    }
+    if (e == "Play") {
+        $(".button-nfplayerPlay").click()
+        console.log("play triggered")
+    }
+});

@@ -10,7 +10,9 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
-    console.log(msg);
+  });
+  socket.on('group control', function(ctrl){
+    io.emit('group control', ctrl);
   });
 });
 
