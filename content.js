@@ -1,28 +1,13 @@
-autopause = setInterval(()=>{$(".button-nfplayerPause").click()}, 100)
-$(".sizing-wrapper").click(()=>{clearInterval(autopause)})
+//I don't know what I"m doing - Sahm Samarghandi
+
+//This pauses the video so for syncing purposes.
+autopause = setInterval(() => { $(".button-nfplayerPause").click() }, 100)
+$(".sizing-wrapper").click(() => { clearInterval(autopause) })
+
 //User variable that can be changed client-side
 var user = "Snowden"
 
-// Creates and adds button to document body
-var Butt = $('<button/>',
-    {
-        text: 'Chat',
-        click: function () {
-            $(".main-window").toggle()
-        }
-    });
-Butt.addClass("main-butt");
-$(document.body).append(Butt);
-
-//Creates and adds chat window
-var chat_main = $('<div style="display:none" class="main-window"> <div/>');
-$(document.body).append(chat_main);
-
-//Creates and adds chat window
-var chat_text = $('<div class="text-window"> <div/>');
-$(".main-window").append(chat_text);
-
-//Socket IO bit
+//Creating the socket connection
 var socket = io("https://netflixnchat.herokuapp.com/");
 socket.on('chat message', function (msg) {
     if (msg) {
@@ -31,14 +16,88 @@ socket.on('chat message', function (msg) {
     }
 });
 
+//Main background window
+var chat_main = $('<div style="display:none" class="main-window"> <div/>');
+$(document.body).append(chat_main);
 
-//Create and adds the input field and submit button
+//Text box
+var chat_text = $('<div class="text-window"> <div/>');
+$(".main-window").append(chat_text);
+
+//clicks the pause/play button on socket command button
+socket.on('group control', function (e) {
+    console.log("socket caught")
+    console.log(e)
+    if (e[0] == "Pause") {
+        $(".button-nfplayerPause").click()
+        console.log("pause triggered")
+    }
+    if (e[0] == "Play") {
+        $(".button-nfplayerPlay").click()
+        clearInterval(autopause);
+        console.log("play triggered")
+    }
+    if (e[0] == "Sync") {
+        $(".scrubber-head").attr("aria-valuenow")
+        location.href = location.href + "&t=" + e[1].toString()
+        $(".button-nfplayerPlay").click()
+        console.log("Sync triggered")
+    }
+});
+
+//Main button that opens and closes the main window
+var chat_button = $('<button/>',
+    {
+        text: 'Chat',
+        click: function () {
+            $(".main-window").toggle()
+        }
+    });
+chat_button.addClass("main-butt");
+$(document.body).append(chat_button);
+
+
+//Group Pause button
+var group_pause = $('<button/>',
+    {
+        text: 'Pause',
+        click: function () {
+            socket.emit("group control", ["Pause", null])
+        }
+    });
+group_pause.addClass("group-pause");
+$(".main-window").append(group_pause);
+
+//Group Play button
+var group_play = $('<button/>',
+    {
+        text: 'Play',
+        click: function () {
+            socket.emit("group control", ["Play", null])
+        }
+    });
+group_play.addClass("group-play");
+$(".main-window").append(group_play);
+
+//Group Sync button
+var sync = $('<button/>',
+    {
+        text: 'Sync',
+        click: function () {
+            value = $(".scrubber-head").attr("aria-valuenow")
+            socket.emit("group control", ["Sync", value])
+        }
+    });
+sync.addClass("sync");
+$(".main-window").append(sync);
+
+//Create and adds the input field
 var input = $('<input class="chat-input" type="text">');
 input.keypress((e) => {
     if (e.key == "Enter") {
         if ($(".chat-input").val().length > 0) {
-                socket.emit("chat message", (user + ": " + "<span class=\"msg-text\">" + $(".chat-input").val() + "</span>"));
-                $(".chat-input").val("");
+            socket.emit("chat message", (user + ": " + "<span class=\"msg-text\">" + $(".chat-input").val() + "</span>"));
+            $(".chat-input").val("");
         }
     }
 })
@@ -73,62 +132,3 @@ name_field.keypress((e) => {
 $(".main-window").append(name_field);
 
 
-
-
-//clicks the pause/play button on socket command button
-socket.on('group control', function (e) {
-    console.log("socket caught")
-    console.log(e)
-    if (e[0] == "Pause") {
-        $(".button-nfplayerPause").click()
-        console.log("pause triggered")
-    }
-    if (e[0] == "Play") {
-        $(".button-nfplayerPlay").click()
-        clearInterval(autopause);
-        console.log("play triggered")
-    }
-    if (e[0] == "Sync") {
-        $(".scrubber-head").attr("aria-valuenow")
-        location.href = location.href + "&t=" + e[1].toString()
-        $(".button-nfplayerPlay").click()
-        console.log("Sync triggered")
-    }
-});
-
-var group_pause = $('<button/>',
-    {
-        text: 'Pause',
-        click: function () {
-            socket.emit("group control", ["Pause", null])
-            }
-        }
-
-    );
-group_pause.addClass("group-pause");
-$(".main-window").append(group_pause);
-
-var group_play = $('<button/>',
-    {
-        text: 'Play',
-        click: function () {
-            socket.emit("group control", ["Play", null])
-            }
-        }
-
-    );
-group_play.addClass("group-play");
-$(".main-window").append(group_play);
-
-var sync = $('<button/>',
-    {
-        text: 'Sync',
-        click: function () {
-            value = $(".scrubber-head").attr("aria-valuenow")
-            socket.emit("group control", ["Sync", value])
-            }
-        }
-
-    );
-sync.addClass("sync");
-$(".main-window").append(sync);
