@@ -42,7 +42,7 @@
     position: relative;
     top: 75px;
     margin: auto;
-    height: 80%;
+    height: 75%;
     width: 270px;
     background-color: white;
     color: black;
@@ -109,6 +109,58 @@
     margin: auto;
     height: 44px;
     width: 200px;
+    background-color: white;
+    color: black;
+    font-family: cursive;
+    font-size: 16px;
+    z-index: 2;
+    transition: opacity, .5s;
+}
+
+.group-play{    
+    text-align: center;
+    padding: 0;
+    position: absolute;
+    bottom: 70px;
+    right: 75px;
+    margin: auto;
+    height: 35px;
+    width: 50px;
+    background-color: white;
+    color: black;
+    font-family: cursive;
+    font-size: 16px;
+    z-index: 2;
+    transition: opacity, .5s;
+
+}
+
+.group-pause{
+    text-align: center;
+    padding: 0;
+    position: absolute;
+    bottom: 70px;
+    right: 15px;
+    margin: auto;
+    height: 35px;
+    width: 50px;
+    background-color: white;
+    color: black;
+    font-family: cursive;
+    font-size: 16px;
+    z-index: 2;
+    transition: opacity, .5s;
+}
+
+.sync{
+    text-align: center;
+    padding: 0;
+    position: absolute;
+    bottom: 70px;
+    right: 135px;
+    margin: auto;
+    height: 35px;
+    width: 50px;
     background-color: white;
     color: black;
     font-family: cursive;
