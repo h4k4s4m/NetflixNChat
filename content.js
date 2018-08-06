@@ -1,8 +1,10 @@
 //I don't know what I"m doing - Sahm Samarghandi
-
+$( document ).ready(()=>{
 //This pauses the video so for syncing purposes.
-autopause = setInterval(() => { $(".button-nfplayerPause").click() }, 100)
-$(".sizing-wrapper").click(() => { clearInterval(autopause) })
+autopause = setInterval(() => { $(".button-nfplayerPause").click() }, 1)
+console.log(autopause)
+$(".group-play").click(() => { clearInterval(autopause);
+console.log("cleared interval") })
 
 //User variable that can be changed client-side
 var user = "Snowden"
@@ -38,8 +40,7 @@ socket.on('group control', function (e) {
         console.log("play triggered")
     }
     if (e[0] == "Sync") {
-        $(".scrubber-head").attr("aria-valuenow")
-        location.href = location.href + "&t=" + e[1].toString()
+        location.href = e[1]
         $(".button-nfplayerPlay").click()
         console.log("Sync triggered")
     }
@@ -85,7 +86,8 @@ var sync = $('<button/>',
         text: 'Sync',
         click: function () {
             value = $(".scrubber-head").attr("aria-valuenow")
-            socket.emit("group control", ["Sync", value])
+            url = location.href + "&t=" + value
+            socket.emit("group control", ["Sync", url])
         }
     });
 sync.addClass("sync");
@@ -130,5 +132,5 @@ name_field.keypress((e) => {
     }
 })
 $(".main-window").append(name_field);
-
+})
 
